@@ -19,7 +19,7 @@ import java.util.Random;
  */
 public class GameEngine extends JFrame {
 
-    public static int SCREEN_WIDTH=900;
+    public static int SCREEN_WIDTH=500;
     public static int SCREEN_HEIGHT=600;
 
     private Image buffer = null;
