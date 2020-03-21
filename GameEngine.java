@@ -19,7 +19,7 @@ import java.util.Random;
  */
 public class GameEngine extends JFrame {
 
-    public static int SCREEN_WIDTH=500;
+    public static int SCREEN_WIDTH=900;
     public static int SCREEN_HEIGHT=600;
 
     private Image buffer = null;
@@ -27,12 +27,15 @@ public class GameEngine extends JFrame {
 
     public static Random rng = new Random();
 
-    private ArrayList<GameObject> objects = new ArrayList<GameObject>();
+    private static ArrayList<GameObject> objects = new ArrayList<GameObject>();
 
     public static void main(String args[]) {
         new GameEngine();
     }
-
+    public static void AddObject(GameObject x)
+    {
+    	objects.add(x);
+    }
     private GameEngine() {
 
         setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -41,7 +44,6 @@ public class GameEngine extends JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         timer = new Timer();
-
         class ClockTickTask extends TimerTask {
             public void run() {
                 tick();
@@ -57,12 +59,13 @@ public class GameEngine extends JFrame {
         for (int i=0; i<5; i++) {
             objects.add(new Coin((i+1)*100,(i+1)*100));
         }
-        objects.add(new Dad(500,500));
+        AddObject(new Dad(500,500));
+        AddObject(new TJ(500,500));
     }
-
+    
 
     private void tick() {
-
+    	
         for(int i=0; i<objects.size(); i++) {
             objects.get(i).move();
         }
