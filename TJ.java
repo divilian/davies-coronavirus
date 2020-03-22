@@ -35,13 +35,13 @@ public class TJ extends GameObject {
             x = 0;
             dx = -dx;
             if (numTJs < MAX_TJS) {
-                GameEngine.instance().addObject(new TJ(500,500));
+                GameEngine.instance().addObject(new TJ(x,y));
             }
         } else if(x > GameEngine.SCREEN_WIDTH - 80) {
             x = GameEngine.SCREEN_WIDTH - 80;
             dx = -dx;
             if (numTJs < MAX_TJS) {
-                GameEngine.instance().addObject(new TJ(500,500));
+                GameEngine.instance().addObject(new TJ(x,y));
             }
         }
         y += dy;
@@ -49,13 +49,13 @@ public class TJ extends GameObject {
             y = 0;
             dy = -dy;
             if (numTJs < MAX_TJS) {
-                GameEngine.instance().addObject(new TJ(500,500));
+                GameEngine.instance().addObject(new TJ(x,y));
             }
         } else if(y > GameEngine.SCREEN_HEIGHT - 80) {
             y = GameEngine.SCREEN_HEIGHT - 80;
             dy = -dy;
             if (numTJs < MAX_TJS) {
-                GameEngine.instance().addObject(new TJ(500,500));
+                GameEngine.instance().addObject(new TJ(x,y));
             }
         }
     }
