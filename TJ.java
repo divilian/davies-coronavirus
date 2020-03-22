@@ -10,9 +10,9 @@ public class TJ extends GameObject {
 
 	public TJ(int x, int y) {
 		super(x, y, "TJ.png");
-        dx = GameEngine.rng.nextInt(10) - 5;
-        dy = GameEngine.rng.nextInt(10) - 5;
         numTJs++;
+        dx = GameEngine.rng.nextInt(51) - 25;
+        dy = GameEngine.rng.nextInt(51) - 25;
 	}
 	
     /**
