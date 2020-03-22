@@ -30,21 +30,21 @@ public class TJ extends GameObject {
         if(x < 0) {
             x = 0;
             dx = -dx;
-            GameEngine.AddObject(new TJ(500,500));
+            GameEngine.instance().addObject(new TJ(500,500));
         } else if(x > GameEngine.SCREEN_WIDTH - 80) {
             x = GameEngine.SCREEN_WIDTH - 80;
             dx = -dx;
-            GameEngine.AddObject(new TJ(500,500));
+            GameEngine.instance().addObject(new TJ(500,500));
         }
         y += dy;
         if(y < 0) {
             y = 0;
             dy = -dy;
-            GameEngine.AddObject(new TJ(500,500));
+            GameEngine.instance().addObject(new TJ(500,500));
         } else if(y > GameEngine.SCREEN_HEIGHT - 80) {
             y = GameEngine.SCREEN_HEIGHT - 80;
             dy = -dy;
-            GameEngine.AddObject(new TJ(500,500));
+            GameEngine.instance().addObject(new TJ(500,500));
         }
     }
 

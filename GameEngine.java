@@ -22,20 +22,39 @@ public class GameEngine extends JFrame {
     public static int SCREEN_WIDTH=900;
     public static int SCREEN_HEIGHT=600;
 
+    private static GameEngine theInstance;
+
     private Image buffer = null;
     private Timer timer = null;
 
     public static Random rng = new Random();
 
-    private static ArrayList<GameObject> objects = new ArrayList<GameObject>();
+    private static ArrayList<GameObject> fgObjects =
+         new ArrayList<GameObject>();
+    private static ArrayList<GameObject> bgObjects =
+        new ArrayList<GameObject>();
+
+
+    public static GameEngine instance() {
+        if (theInstance == null) {
+            theInstance = new GameEngine();
+        }
+        return theInstance;
+    }
 
     public static void main(String args[]) {
-        new GameEngine();
+        GameEngine.instance();
     }
-    public static void AddObject(GameObject x)
+
+    public void addObject(GameObject x)
     {
-    	objects.add(x);
+        if (x.isFgObject()) {
+            fgObjects.add(x);
+        } else {
+            bgObjects.add(x);
+        }
     }
+
     private GameEngine() {
 
         setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -53,21 +72,24 @@ public class GameEngine extends JFrame {
         timer.scheduleAtFixedRate(new ClockTickTask(), 50, 50);
 
         Warrior w = Warrior.instance();
-        objects.add(w);
+        addObject(w);
         addKeyListener(w);
 
         for (int i=0; i<5; i++) {
-            objects.add(new Coin((i+1)*100,(i+1)*100));
+            addObject(new Coin((i+1)*100,(i+1)*100));
         }
-        AddObject(new Dad(500,500));
-        AddObject(new TJ(500,500));
+        addObject(new Dad(500,500));
+        addObject(new TJ(500,500));
     }
     
 
     private void tick() {
     	
-        for(int i=0; i<objects.size(); i++) {
-            objects.get(i).move();
+        for (int i=0; i<fgObjects.size(); i++) {
+            fgObjects.get(i).move();
+        }
+        for (int i=0; i<bgObjects.size(); i++) {
+            bgObjects.get(i).move();
         }
     }
 
@@ -82,16 +104,14 @@ public class GameEngine extends JFrame {
         bufferGraphics.setColor(Color.BLACK);
         bufferGraphics.fillRect(0, 0, getWidth(), getHeight());
 
-        for(int i=0; i<objects.size(); i++) {
-            objects.get(i).draw(bufferGraphics);
+        for (GameObject o: bgObjects) {
+            o.draw(bufferGraphics);
+        }
+        for (GameObject o: fgObjects) {
+            o.draw(bufferGraphics);
         }
 
         g.drawImage(buffer, 0, 0, this);
-    }
-
-
-    void addGameObject(GameObject go) {
-        objects.add(go);
     }
 
 }

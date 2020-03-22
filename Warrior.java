@@ -23,6 +23,10 @@ public class Warrior extends GameObject implements KeyListener {
         return theOneTrueWarrior;
     }
 
+    public boolean isFgObject() {
+        return true;
+    }
+
     private Warrior(int x, int y) {
         super(x, y, "warrior.png");
         currentDirection = "stopped";

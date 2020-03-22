@@ -15,7 +15,6 @@ abstract public class GameObject implements ImageObserver {
     protected int x, y;
     protected int dx, dy;
     private Image image;
-    
 
     public GameObject(int startX, int startY, String imageName) {
 
@@ -30,6 +29,9 @@ abstract public class GameObject implements ImageObserver {
         catch (Exception e) { e.printStackTrace(); System.exit(1); }
     }
     
+    public boolean isFgObject() {
+        return false;
+    }
 
     /**
      * Move this object one clock tick's worth of movement. Subclasses can
