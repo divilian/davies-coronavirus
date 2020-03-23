@@ -55,6 +55,14 @@ public class GameEngine extends JFrame {
         }
     }
 
+    public void removeObject(GameObject x)
+    {
+        if (x.isFgObject()) {
+            fgObjects.remove(x);
+        } else {
+            bgObjects.remove(x);
+        }
+    }
     private GameEngine() {
 
         setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -84,12 +92,21 @@ public class GameEngine extends JFrame {
     
 
     private void tick() {
-    	
         for (int i=0; i<fgObjects.size(); i++) {
             fgObjects.get(i).move();
         }
         for (int i=0; i<bgObjects.size(); i++) {
             bgObjects.get(i).move();
+        }
+        for (int i=0; i<fgObjects.size(); i++) {
+            if(Warrior.instance().collidingWith(fgObjects.get(i))) {
+            	Warrior.instance().touch(fgObjects.get(i));
+            }
+        }    
+        for (int i=0; i<bgObjects.size(); i++) {
+        	if(Warrior.instance().collidingWith(bgObjects.get(i))) {
+            	Warrior.instance().touch(bgObjects.get(i));
+            }
         }
     }
 

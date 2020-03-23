@@ -6,7 +6,7 @@ import java.awt.Graphics;
 public class Coin extends GameObject {
 	
 	public Coin(int x, int y) {
-		super(x, y, "coin.png");
+		super(x, y, 72, 74, "coin.png");
 	}
 	
     /**
@@ -17,6 +17,14 @@ public class Coin extends GameObject {
         return 1;
     }
 
+    public void touch(GameObject o)
+    {
+    	
+    }
+    public String getName()
+    {
+    	return "Coin";
+    }
     /**
      * Coins are stationary.
      */

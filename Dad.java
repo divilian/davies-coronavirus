@@ -6,7 +6,7 @@ import java.awt.Graphics;
 public class Dad extends GameObject {
 	
 	public Dad(int x, int y) {
-		super(x, y, "dad.png");
+		super(x, y, 75, 90, "dad.png");
         dx = GameEngine.rng.nextInt(10) - 5;
         dy = GameEngine.rng.nextInt(10) - 5;
 	}
@@ -18,7 +18,14 @@ public class Dad extends GameObject {
     public int getAge() {
         return 36;
     }
-
+    public String getName()
+    {
+    	return "Dad";
+    }
+    public void touch(GameObject o)
+    {
+    	
+    }
     /**
      * Move this Dad, in an ordinary bouncing pattern. This method overrides
      * the {@link GameObject#move} method.
@@ -41,6 +48,7 @@ public class Dad extends GameObject {
             y = GameEngine.SCREEN_HEIGHT - 80;
             dy = -dy;
         }
+        updateHitbox();
     }
 
     public void draw(Graphics g) {

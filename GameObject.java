@@ -1,4 +1,3 @@
-
 import java.io.File;
 import javax.imageio.ImageIO;
 import java.awt.Image;
@@ -14,15 +13,19 @@ abstract public class GameObject implements ImageObserver {
 
     protected int x, y;
     protected int dx, dy;
+    protected int height, width;
+    protected int top, bottom, left, right;
     private Image image;
-
-    public GameObject(int startX, int startY, String imageName) {
+    
+    public GameObject(int startX, int startY, int w, int h, String imageName) {
 
         x = startX;
         y = startY;
+        width = w;
+        height = h;
         dx = 0;
         dy = 0;
-
+        updateHitbox();
         try {
             image = ImageIO.read(new File(imageName));
         }
@@ -32,7 +35,25 @@ abstract public class GameObject implements ImageObserver {
     public boolean isFgObject() {
         return false;
     }
+    
+    public void kill() {
+    	GameEngine.instance().removeObject(this);
+    }
+    
+    public void updateHitbox() {
+        left = x-width/2;
+        right = x+width/2;
+        top = y-height/2;
+        bottom = y+height/2;
+    }
+    
+    public boolean collidingWith(GameObject o) {
+    	return (left<=o.right)&&(o.left<right)&&(top<o.bottom)&&(bottom>o.top);
+    }
 
+    public abstract void touch(GameObject o);
+    
+    public abstract String getName();
     /**
      * Move this object one clock tick's worth of movement. Subclasses can
      * override this method to implement creature-type-specific move
@@ -51,6 +72,7 @@ abstract public class GameObject implements ImageObserver {
         } else if(y > GameEngine.SCREEN_HEIGHT - 80) {
             y = GameEngine.SCREEN_HEIGHT - 80;
         }
+        updateHitbox();
     }
     
 

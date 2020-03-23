@@ -9,7 +9,7 @@ public class TJ extends GameObject {
     private static final int MAX_TJS = 50;
 
 	public TJ(int x, int y) {
-		super(x, y, "TJ.png");
+		super(x, y, 75, 90, "TJ.png");
         numTJs++;
         dx = GameEngine.rng.nextInt(51) - 25;
         dy = GameEngine.rng.nextInt(51) - 25;
@@ -22,8 +22,21 @@ public class TJ extends GameObject {
     public int getAge() {
         return 13;
     }
+    public String getName()
+    {
+    	return "TJ";
+    }
+    public void touch(GameObject o)
+    {
+    	
+    }
     
-
+    public void kill()
+    {
+    	super.kill();
+    	numTJs--;
+    	System.out.println(numTJs);
+    }
     /**
      * Move this Dad, in an ordinary bouncing pattern. This method overrides
      * the {@link GameObject#move} method.
@@ -58,6 +71,7 @@ public class TJ extends GameObject {
                 GameEngine.instance().addObject(new TJ(x,y));
             }
         }
+        updateHitbox();
     }
 
     public void draw(Graphics g) {

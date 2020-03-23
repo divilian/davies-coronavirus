@@ -22,13 +22,25 @@ public class Warrior extends GameObject implements KeyListener {
         }
         return theOneTrueWarrior;
     }
-
+    
+    public void touch(GameObject o)
+    {
+    	if(o.getName().equals("TJ"))
+    	{
+    		o.kill();   		
+    	}
+    }
+    
+    public String getName()
+    {
+    	return "Warrior";
+    }
     public boolean isFgObject() {
         return true;
     }
 
     private Warrior(int x, int y) {
-        super(x, y, "warrior.png");
+        super(x, y, 80, 80, "warrior.png");
         currentDirection = "stopped";
     }
 
@@ -65,8 +77,8 @@ public class Warrior extends GameObject implements KeyListener {
             dx = 0;
             dy = 0;
         }
-
         super.move();
+      
     }
 
 
