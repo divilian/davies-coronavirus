@@ -1,6 +1,8 @@
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
@@ -21,6 +23,14 @@ public class GameEngine extends JFrame {
 
     public static int SCREEN_WIDTH=900;
     public static int SCREEN_HEIGHT=600;
+    public static int SCOREBOARD_HEIGHT=100;
+
+    public static int LEFT_SIDE=0;
+    public static int RIGHT_SIDE=SCREEN_WIDTH;
+    public static int TOP_SIDE=SCOREBOARD_HEIGHT;
+    public static int BOTTOM_SIDE=SCREEN_HEIGHT;
+
+    private int score;
 
     private static GameEngine theInstance;
 
@@ -67,6 +77,7 @@ public class GameEngine extends JFrame {
 
         setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
         setVisible(true);
+
         buffer = createImage(SCREEN_WIDTH, SCREEN_HEIGHT);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -88,8 +99,14 @@ public class GameEngine extends JFrame {
         }
         addObject(new Dad(500,500));
         addObject(new TJ(500,500));
+
+        score = 0;
     }
     
+
+    public void addToScore(int pts) {
+        score += pts;
+    }
 
     private void tick() {
         for (int i=0; i<fgObjects.size(); i++) {
@@ -129,6 +146,16 @@ public class GameEngine extends JFrame {
         for (GameObject o: fgObjects) {
             o.draw(bufferGraphics);
         }
+
+        // FIX: All these numbers were just determined by trial-and-error.
+        // FIX: Making a JLabel and using a layout manager is probably the
+        // better way to do this.
+        bufferGraphics.setColor(Color.GRAY);
+        bufferGraphics.fillRoundRect(30,40,getWidth()/2,
+            SCOREBOARD_HEIGHT/2,50,50);
+        bufferGraphics.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 24));
+        bufferGraphics.setColor(Color.YELLOW);
+        bufferGraphics.drawString("Score: " + score,50,70);
 
         g.drawImage(buffer, 0, 0, this);
     }
