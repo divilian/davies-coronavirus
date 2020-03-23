@@ -40,16 +40,16 @@ abstract public class GameObject implements ImageObserver {
      */
     public void move() {
         x += dx;
-        if(x < 0) {
-            x = 0;
-        } else if(x > GameEngine.SCREEN_WIDTH - 80) {
-            x = GameEngine.SCREEN_WIDTH - 80;
+        if (x < GameEngine.LEFT_SIDE) {
+            x = GameEngine.LEFT_SIDE;
+        } else if(x > GameEngine.RIGHT_SIDE - 80) {
+            x = GameEngine.RIGHT_SIDE - 80;
         }
         y += dy;
-        if(y < 0) {
-            y = 0;
-        } else if(y > GameEngine.SCREEN_HEIGHT - 80) {
-            y = GameEngine.SCREEN_HEIGHT - 80;
+        if (y < GameEngine.TOP_SIDE) {
+            y = GameEngine.TOP_SIDE;
+        } else if (y > GameEngine.BOTTOM_SIDE - 80) {
+            y = GameEngine.BOTTOM_SIDE - 80;
         }
     }
     

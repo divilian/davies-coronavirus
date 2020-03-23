@@ -21,6 +21,10 @@ public class GameEngine extends JFrame {
 
     public static int SCREEN_WIDTH=900;
     public static int SCREEN_HEIGHT=600;
+    public static int LEFT_SIDE=0;
+    public static int RIGHT_SIDE=SCREEN_WIDTH;
+    public static int TOP_SIDE=0;
+    public static int BOTTOM_SIDE=SCREEN_HEIGHT;
 
     private static GameEngine theInstance;
 
