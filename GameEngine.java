@@ -99,7 +99,9 @@ public class GameEngine extends JFrame {
      *  appropriate positions.
      */
     public void paint(Graphics g) {
-
+    	if(buffer == null) {
+    		return;
+    	}
         Graphics bufferGraphics = buffer.getGraphics();
         bufferGraphics.setColor(Color.BLACK);
         bufferGraphics.fillRect(0, 0, getWidth(), getHeight());
