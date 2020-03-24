@@ -6,13 +6,15 @@ import java.awt.Graphics;
 public class TJ extends BouncingGameObject {
 	
     private static int numTJs = 0;
-    private static final int MAX_TJS = 50;
-
+    private static final int MAX_TJS = 25;
+    private static int speedMultiplier = 1;
 	public TJ(int x, int y) {
 		super(x, y, 75, 90, "TJ.png");
         numTJs++;
         dx = GameEngine.rng.nextInt(51) - 25;
         dy = GameEngine.rng.nextInt(51) - 25;
+        dx*=speedMultiplier;
+        dy*=speedMultiplier;
 	}
 	
     /**
@@ -30,7 +32,10 @@ public class TJ extends BouncingGameObject {
     {
     	
     }
-    
+    public static void speedUp()
+    {
+    	speedMultiplier++;
+    }
     public void kill()
     {
     	super.kill();

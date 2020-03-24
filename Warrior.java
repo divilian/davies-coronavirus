@@ -29,6 +29,12 @@ public class Warrior extends GameObject implements KeyListener {
     	{
     		o.kill();   		
     	}
+    	if(o.getName().equals("Coin"))
+    	{
+    		GameEngine.instance().addToScore(100);
+    		o.kill();
+    		TJ.speedUp();
+    	}
     }
     
     public String getName()
