@@ -24,14 +24,15 @@ public class GameEngine extends JFrame {
     public static int SCREEN_WIDTH=900;
     public static int SCREEN_HEIGHT=600;
     public static int SCOREBOARD_HEIGHT=100;
-
+    
     public static int LEFT_SIDE=0;
     public static int RIGHT_SIDE=SCREEN_WIDTH;
     public static int TOP_SIDE=SCOREBOARD_HEIGHT;
     public static int BOTTOM_SIDE=SCREEN_HEIGHT;
-
+    
     private int score;
-
+    private boolean win = false;
+    
     private static GameEngine theInstance;
 
     private Image buffer = null;
@@ -84,8 +85,10 @@ public class GameEngine extends JFrame {
         timer = new Timer();
         class ClockTickTask extends TimerTask {
             public void run() {
-                tick();
-                repaint();
+            	if(!win) {
+            		tick();
+            		repaint();
+            	}
             }
         }
         timer.scheduleAtFixedRate(new ClockTickTask(), 50, 50);
@@ -109,11 +112,13 @@ public class GameEngine extends JFrame {
     }
 
     private void tick() {
+    	
         for (int i=0; i<fgObjects.size(); i++) {
             fgObjects.get(i).move();
         }
         for (int i=0; i<bgObjects.size(); i++) {
             bgObjects.get(i).move();
+            
         }
         for (int i=0; i<fgObjects.size(); i++) {
             if(Warrior.instance().collidingWith(fgObjects.get(i))) {
@@ -124,6 +129,15 @@ public class GameEngine extends JFrame {
         	if(Warrior.instance().collidingWith(bgObjects.get(i))) {
             	Warrior.instance().touch(bgObjects.get(i));
             }
+        }
+        for (int i=0; i<bgObjects.size(); i++) {
+            if(bgObjects.get(i).getName().equals("Coin")) {
+            	break;
+            }
+            else {
+            	win = true;
+            }
+            
         }
     }
 
@@ -136,28 +150,26 @@ public class GameEngine extends JFrame {
     	if(buffer == null) {
     		return;
     	}
-        Graphics bufferGraphics = buffer.getGraphics();
-        bufferGraphics.setColor(Color.BLACK);
-        bufferGraphics.fillRect(0, 0, getWidth(), getHeight());
+   		Graphics bufferGraphics = buffer.getGraphics();
+       	bufferGraphics.setColor(Color.BLACK);
+       	bufferGraphics.fillRect(0, 0, getWidth(), getHeight());
+       	for (GameObject o: bgObjects) {
+           	o.draw(bufferGraphics);
+       	}
+       	for (GameObject o: fgObjects) {
+       		o.draw(bufferGraphics);
+       	}
+       	// FIX: All these numbers were just determined by trial-and-error.
+       	// FIX: Making a JLabel and using a layout manager is probably the
+       	// better way to do this.
+       	bufferGraphics.setColor(Color.GRAY);
+       	bufferGraphics.fillRoundRect(30,40,getWidth()/2,
+       		SCOREBOARD_HEIGHT/2,50,50);
+       	bufferGraphics.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 24));
+       	bufferGraphics.setColor(Color.YELLOW);
+       	bufferGraphics.drawString("Score: " + score,50,70);
 
-        for (GameObject o: bgObjects) {
-            o.draw(bufferGraphics);
-        }
-        for (GameObject o: fgObjects) {
-            o.draw(bufferGraphics);
-        }
-
-        // FIX: All these numbers were just determined by trial-and-error.
-        // FIX: Making a JLabel and using a layout manager is probably the
-        // better way to do this.
-        bufferGraphics.setColor(Color.GRAY);
-        bufferGraphics.fillRoundRect(30,40,getWidth()/2,
-            SCOREBOARD_HEIGHT/2,50,50);
-        bufferGraphics.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 24));
-        bufferGraphics.setColor(Color.YELLOW);
-        bufferGraphics.drawString("Score: " + score,50,70);
-
-        g.drawImage(buffer, 0, 0, this);
+       	g.drawImage(buffer, 0, 0, this);
     }
 
 }
