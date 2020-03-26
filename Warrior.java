@@ -27,7 +27,8 @@ public class Warrior extends GameObject implements KeyListener {
     {
     	if(o.getName().equals("TJ"))
     	{
-    		o.kill();   		
+    		//o.kill();
+    		o.infect();
     	}
     	if(o.getName().equals("Coin"))
     	{

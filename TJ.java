@@ -1,5 +1,10 @@
 
 import java.awt.event.KeyListener;
+import java.awt.image.ImageObserver;
+import java.io.File;
+
+import javax.imageio.ImageIO;
+
 import java.awt.event.KeyEvent;
 import java.awt.Graphics;
 
@@ -32,10 +37,26 @@ public class TJ extends BouncingGameObject {
     {
     	
     }
+
+    public void infect()
+    {
+    	if(!infected)
+    	{
+    		infected = true;
+    		dx*=0.5;
+    		dy*=0.5;
+    		try {
+    			image = ImageIO.read(new File("TJ_Infected.png"));
+    		}
+        	catch (Exception e) { e.printStackTrace(); System.exit(1); }
+    	}
+    }
+    
     public static void speedUp()
     {
-    	speedMultiplier++;
+    	speedMultiplier+=0.5;
     }
+    
     public void kill()
     {
     	super.kill();
@@ -54,6 +75,6 @@ public class TJ extends BouncingGameObject {
     }
     
     public void draw(Graphics g) {
-        super.draw(g);
+    	super.draw(g);
     }
 }

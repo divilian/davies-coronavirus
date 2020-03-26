@@ -15,7 +15,8 @@ abstract public class GameObject implements ImageObserver {
     protected int dx, dy;
     protected int height, width;
     protected int top, bottom, left, right;
-    private Image image;
+    protected boolean infected;
+    protected Image image;
     
     public GameObject(int startX, int startY, int w, int h, String imageName) {
 
@@ -25,6 +26,7 @@ abstract public class GameObject implements ImageObserver {
         height = h;
         dx = 0;
         dy = 0;
+        infected = false;
         updateHitbox();
         try {
             image = ImageIO.read(new File(imageName));
@@ -34,6 +36,10 @@ abstract public class GameObject implements ImageObserver {
     
     public boolean isFgObject() {
         return false;
+    }
+    
+    public void infect() {
+    	infected = true;
     }
     
     public void kill() {
@@ -82,6 +88,7 @@ abstract public class GameObject implements ImageObserver {
      * painting.
      */
     public void draw(Graphics g) {
+    	
         g.drawImage(image, x, y, (ImageObserver)this);
     }
 
