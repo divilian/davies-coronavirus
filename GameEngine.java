@@ -10,6 +10,8 @@ import java.awt.Image;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 
@@ -40,10 +42,10 @@ public class GameEngine extends JFrame {
 
     public static Random rng = new Random();
 
-    private static ArrayList<GameObject> fgObjects =
-         new ArrayList<GameObject>();
-    private static ArrayList<GameObject> bgObjects =
-        new ArrayList<GameObject>();
+    private static List<GameObject> fgObjects =
+         Collections.synchronizedList(new ArrayList<GameObject>());
+    private static List<GameObject> bgObjects =
+         Collections.synchronizedList(new ArrayList<GameObject>());
 
 
     public static GameEngine instance() {
