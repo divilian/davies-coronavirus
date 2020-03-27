@@ -2,8 +2,11 @@
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 import java.awt.Image;
@@ -23,14 +26,15 @@ import java.util.Random;
  */
 public class GameEngine extends JFrame {
 
-    public static int SCREEN_WIDTH=900;
-    public static int SCREEN_HEIGHT=600;
-    public static int SCOREBOARD_HEIGHT=100;
-    
-    public static int LEFT_SIDE=0;
-    public static int RIGHT_SIDE=SCREEN_WIDTH;
-    public static int TOP_SIDE=SCOREBOARD_HEIGHT;
-    public static int BOTTOM_SIDE=SCREEN_HEIGHT;
+    // These dimension-related variables are set in the static initializer.
+    public static int SCREEN_WIDTH;
+    public static int SCREEN_HEIGHT;
+    public static int LEFT_SIDE;
+    public static int RIGHT_SIDE;
+    public static int TOP_SIDE;
+    public static int BOTTOM_SIDE;
+
+    public static final int SCOREBOARD_HEIGHT=100;
     
     private int score;
     private boolean win = false;
@@ -76,10 +80,23 @@ public class GameEngine extends JFrame {
             bgObjects.remove(x);
         }
     }
+
+    static {
+        // Find out the screen size and set dimensions accordingly.
+        Dimension b = Toolkit.getDefaultToolkit().getScreenSize();
+        SCREEN_WIDTH = (int)b.width;
+        SCREEN_HEIGHT = (int)b.height;
+        LEFT_SIDE=0;
+        RIGHT_SIDE=SCREEN_WIDTH;
+        TOP_SIDE=SCOREBOARD_HEIGHT;
+        BOTTOM_SIDE=SCREEN_HEIGHT;
+    }
+
     private GameEngine() {
 
-        setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+        setUndecorated(true);
         setVisible(true);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         buffer = createImage(SCREEN_WIDTH, SCREEN_HEIGHT);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
