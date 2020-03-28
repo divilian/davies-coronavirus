@@ -48,6 +48,7 @@ public class Warrior extends GameObject implements KeyListener {
 
     private Warrior(int x, int y) {
         super(x, y, 80, 80, "warrior.png");
+        z = 20;   // This is the top-most object.
         currentDirection = "stopped";
     }
 

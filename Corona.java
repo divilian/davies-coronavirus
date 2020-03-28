@@ -9,6 +9,7 @@ public class Corona extends BouncingGameObject {
 		super(x, y, 75, 75, "corona.png");
         dx = GameEngine.rng.nextInt(10) - 5;
         dy = GameEngine.rng.nextInt(10) - 5;
+        z = 19;   // This is in the near foreground.
 	}
 	
     /**

@@ -20,6 +20,7 @@ public class TJ extends BouncingGameObject {
         dy = GameEngine.rng.nextInt(51) - 25;
         dx*=speedMultiplier;
         dy*=speedMultiplier;
+        z = 8;  // Near background.
 	}
 	
     /**

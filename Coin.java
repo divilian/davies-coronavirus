@@ -7,6 +7,7 @@ public class Coin extends GameObject {
 	
 	public Coin(int x, int y) {
 		super(x, y, 72, 74, "coin.png");
+        z = 5;  // Draw mostly in the background.
 	}
 	
     /**

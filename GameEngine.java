@@ -46,9 +46,7 @@ public class GameEngine extends JFrame {
 
     public static Random rng = new Random();
 
-    private static List<GameObject> fgObjects =
-         Collections.synchronizedList(new ArrayList<GameObject>());
-    private static List<GameObject> bgObjects =
+    private static List<GameObject> objects =
          Collections.synchronizedList(new ArrayList<GameObject>());
 
 
@@ -65,20 +63,12 @@ public class GameEngine extends JFrame {
 
     public void addObject(GameObject x)
     {
-        if (x.isFgObject()) {
-            fgObjects.add(x);
-        } else {
-            bgObjects.add(x);
-        }
+        objects.add(x);
     }
 
     public void removeObject(GameObject x)
     {
-        if (x.isFgObject()) {
-            fgObjects.remove(x);
-        } else {
-            bgObjects.remove(x);
-        }
+        objects.remove(x);
     }
 
     static {
@@ -132,32 +122,26 @@ public class GameEngine extends JFrame {
 
     private void tick() {
     	
-        for (int i=0; i<fgObjects.size(); i++) {
-            fgObjects.get(i).move();
-        }
-        for (int i=0; i<bgObjects.size(); i++) {
-            bgObjects.get(i).move();
+        for (int i=0; i<objects.size(); i++) {
+            objects.get(i).move();
             
         }
-        for (int i=0; i<fgObjects.size(); i++) {
-            if(Warrior.instance().collidingWith(fgObjects.get(i))) {
-            	Warrior.instance().touch(fgObjects.get(i));
-            }
-        }    
-        for (int i=0; i<bgObjects.size(); i++) {
-        	if(Warrior.instance().collidingWith(bgObjects.get(i))) {
-            	Warrior.instance().touch(bgObjects.get(i));
+        for (int i=0; i<objects.size(); i++) {
+        	if(Warrior.instance().collidingWith(objects.get(i))) {
+            	Warrior.instance().touch(objects.get(i));
             }
         }
-        for (int i=0; i<bgObjects.size(); i++) {
-            if(bgObjects.get(i).getName().equals("Coin")) {
+/*
+ *      ???
+        for (int i=0; i<objects.size(); i++) {
+            if(objects.get(i).getName().equals("Coin")) {
             	break;
             }
             else {
             	win = true;
             }
-            
         }
+*/
     }
 
 
@@ -172,11 +156,12 @@ public class GameEngine extends JFrame {
    		Graphics bufferGraphics = buffer.getGraphics();
        	bufferGraphics.setColor(Color.BLACK);
        	bufferGraphics.fillRect(0, 0, getWidth(), getHeight());
-       	for (GameObject o: bgObjects) {
+
+        // Sort objects by z-order (they know how to do this) so that things
+        // are drawn in the right sequence bottom-to-top.
+        Collections.sort(objects);
+       	for (GameObject o: objects) {
            	o.draw(bufferGraphics);
-       	}
-       	for (GameObject o: fgObjects) {
-       		o.draw(bufferGraphics);
        	}
        	// FIX: All these numbers were just determined by trial-and-error.
        	// FIX: Making a JLabel and using a layout manager is probably the

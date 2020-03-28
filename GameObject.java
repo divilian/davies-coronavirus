@@ -9,9 +9,14 @@ import java.awt.image.ImageObserver;
  * The superclass of all visibly displayable game elements. Inidividual
  * subclasses will override methods for character-specific behavior.
  */
-abstract public class GameObject implements ImageObserver {
+abstract public class GameObject implements ImageObserver,
+    Comparable<GameObject> {
 
     protected int x, y;
+
+    // Z-order values are from 1-20 in the Coronavirus game. A lower score
+    // means it's drawn further in the background. 
+    protected int z;
     protected int dx, dy;
     protected int height, width;
     protected int top, bottom, left, right;
@@ -22,6 +27,7 @@ abstract public class GameObject implements ImageObserver {
 
         x = startX;
         y = startY;
+        z = 10;      // Default: middle of z-order.
         width = w;
         height = h;
         dx = 0;
@@ -34,6 +40,10 @@ abstract public class GameObject implements ImageObserver {
         catch (Exception e) { e.printStackTrace(); System.exit(1); }
     }
     
+    public int compareTo(GameObject o) {
+        return z - o.z;
+    }
+
     public boolean isFgObject() {
         return false;
     }
