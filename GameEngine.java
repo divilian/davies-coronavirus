@@ -84,6 +84,16 @@ public class GameEngine extends JFrame {
 
     private GameEngine() {
 
+        Level level = null;
+        try {
+            level = Level.getNextLevel();
+        } catch (Level.MaxLevelException e) {
+            System.err.println("No levels!");
+            System.exit(99);
+        }
+
+        System.out.println("Playing " + level);
+
         setUndecorated(true);
         setVisible(true);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -102,15 +112,11 @@ public class GameEngine extends JFrame {
         }
         timer.scheduleAtFixedRate(new ClockTickTask(), 50, 50);
 
+        level.populate(this);
+
         Warrior w = Warrior.instance();
         addObject(w);
         addKeyListener(w);
-
-        for (int i=0; i<5; i++) {
-            addObject(new Coin((i+1)*100,(i+1)*100));
-        }
-        addObject(new Dad(500,500));
-        addObject(new TJ(500,500));
 
         score = 0;
     }

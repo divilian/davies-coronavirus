@@ -5,4 +5,3 @@ TJ - Make game end when warrior becomes infected
 TJ - Detect end of level
 TJ - Make NPCs speed up every time a coin is captured
 TJ - Skin "coins" as various groceries instead, for game theme
-SD - Add Level class
