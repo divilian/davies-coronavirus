@@ -1,6 +1,9 @@
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.JButton;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -43,6 +46,7 @@ public class GameEngine extends JFrame {
 
     private Image buffer = null;
     private Timer timer = null;
+    private JButton close;
 
     public static Random rng = new Random();
 
@@ -83,6 +87,18 @@ public class GameEngine extends JFrame {
     }
 
     private GameEngine() {
+
+        setLayout(null);
+        close = new JButton("losers click here");
+        getContentPane().add(close);
+        Insets insets = getInsets();
+        close.setBounds(insets.left + SCREEN_WIDTH - 200,
+            insets.top + 50, 150, 50);
+        close.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                System.exit(100);
+            }
+        });
 
         Level level = null;
         try {
@@ -155,10 +171,15 @@ public class GameEngine extends JFrame {
      * Paints the screen. This method will display all objects at their
      *  appropriate positions.
      */
+
     public void paint(Graphics g) {
+
+        close.repaint();
+
     	if(buffer == null) {
     		return;
     	}
+
    		Graphics bufferGraphics = buffer.getGraphics();
        	bufferGraphics.setColor(Color.BLACK);
        	bufferGraphics.fillRect(0, 0, getWidth(), getHeight());
