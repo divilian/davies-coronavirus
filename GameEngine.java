@@ -149,8 +149,10 @@ public class GameEngine extends JFrame {
             
         }
         for (int i=0; i<objects.size(); i++) {
-        	if(Warrior.instance().collidingWith(objects.get(i))) {
-            	Warrior.instance().touch(objects.get(i));
+	    for(int x=0;x<objects.size(); x++){
+        	if(objects.get(i).collidingWith(objects.get(x))) {
+            	objects.get(i).touch(objects.get(x));
+		}
             }
         }
 /*

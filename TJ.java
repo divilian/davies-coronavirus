@@ -34,10 +34,6 @@ public class TJ extends BouncingGameObject {
     {
     	return "TJ";
     }
-    public void touch(GameObject o)
-    {
-    	
-    }
 
     public void infect()
     {
@@ -62,7 +58,6 @@ public class TJ extends BouncingGameObject {
     {
     	super.kill();
     	numTJs--;
-    	System.out.println(numTJs);
     }
     /**
      * When this TJ hits a wall, clone him (unless we're already at the maximum

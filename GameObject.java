@@ -40,6 +40,10 @@ abstract public class GameObject implements ImageObserver,
         catch (Exception e) { e.printStackTrace(); System.exit(1); }
     }
     
+    public boolean getInfected(){
+        return infected;
+    }
+
     public int compareTo(GameObject o) {
         return z - o.z;
     }
@@ -67,7 +71,10 @@ abstract public class GameObject implements ImageObserver,
     	return (left<=o.right)&&(o.left<right)&&(top<o.bottom)&&(bottom>o.top);
     }
 
-    public abstract void touch(GameObject o);
+    public void touch(GameObject o){
+        if(o.getInfected())
+            this.infect();
+    }
     
     public abstract String getName();
     /**

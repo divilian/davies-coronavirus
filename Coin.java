@@ -18,10 +18,6 @@ public class Coin extends GameObject {
         return 1;
     }
 
-    public void touch(GameObject o)
-    {
-    	
-    }
     public String getName()
     {
     	return "Coin";

@@ -6,7 +6,8 @@ import java.awt.Graphics;
 public class Corona extends BouncingGameObject {
 	
 	public Corona(int x, int y) {
-		super(x, y, 75, 75, "corona.png");
+	    super(x, y, 75, 75, "corona.png");
+	    infected=true;
         dx = GameEngine.rng.nextInt(10) - 5;
         dy = GameEngine.rng.nextInt(10) - 5;
         z = 19;   // This is in the near foreground.
@@ -22,11 +23,8 @@ public class Corona extends BouncingGameObject {
     {
     	return "Corona";
     }
-    public void touch(GameObject o)
-    {
-    	
-    }
    
+    public void infect(){}
 
     public void draw(Graphics g) {
         super.draw(g);

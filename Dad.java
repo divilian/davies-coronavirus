@@ -23,11 +23,6 @@ public class Dad extends BouncingGameObject {
     {
     	return "Dad";
     }
-    public void touch(GameObject o)
-    {
-    	
-    }
-   
 
     public void draw(Graphics g) {
         super.draw(g);
