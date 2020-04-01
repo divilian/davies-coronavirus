@@ -25,6 +25,7 @@ public class Warrior extends GameObject implements KeyListener {
     
     public void touch(GameObject o)
     {
+        super.touch(o);
     	if(o.getName().equals("TJ"))
     	{
     		//o.kill();
@@ -66,20 +67,20 @@ public class Warrior extends GameObject implements KeyListener {
     public void move() {
         
         if (currentDirection.equals("Right")) {
-            dx = 5;
+            dx = 25;
             dy = 0;
         }
         else if (currentDirection.equals("Left")) {
-            dx = -5;
+            dx = -25;
             dy = 0;
         }
         else if (currentDirection.equals("Up")) {
             dx = 0;
-            dy = -5;
+            dy = -25;
         }
         else if (currentDirection.equals("Down")) {
             dx = 0;
-            dy = 5;
+            dy = 25;
         }
         else {
             dx = 0;
@@ -109,6 +110,4 @@ public class Warrior extends GameObject implements KeyListener {
     public void keyTyped(KeyEvent e) {
 
     }
-
-
 }

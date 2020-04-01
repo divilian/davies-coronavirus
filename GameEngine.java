@@ -40,7 +40,8 @@ public class GameEngine extends JFrame {
     public static final int SCOREBOARD_HEIGHT=100;
     
     private int score;
-    private boolean win = false;
+    private static boolean win = false;
+    private static boolean lose = false;
     
     private static GameEngine theInstance;
 
@@ -120,10 +121,42 @@ public class GameEngine extends JFrame {
         timer = new Timer();
         class ClockTickTask extends TimerTask {
             public void run() {
-            	if(!win) {
-            		tick();
-            		repaint();
-            	}
+                if((!win)&&(!lose)){
+                    win=true;
+                    for(GameObject o: objects){
+                        if(o.getName().equals("Coin")){
+                            win = false;
+                            break;
+                        }
+                    }
+                    if(Warrior.instance().getInfected()==true)
+                        lose = true;
+                
+            	    if((!win)&&(!lose)) {
+            		    tick();
+            		    repaint();
+            	    }
+                    else{
+                        if(win){
+                            System.out.println("You Win!!");
+                            System.exit(100);
+                        }
+                        else
+                            if(lose){
+                                System.out.println("You Lose!!!");                
+                                System.exit(100);
+                            }
+                    }
+                }
+                else{
+                    if(win){
+                        System.out.println("You Win!!");
+                    }
+                    else
+                        if(lose){
+                            System.out.println("You Lose!!!");                
+                        }
+               }
             }
         }
         timer.scheduleAtFixedRate(new ClockTickTask(), 50, 50);
