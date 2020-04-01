@@ -46,7 +46,7 @@ public class GameEngine extends JFrame {
 
     private Image buffer = null;
     private Timer timer = null;
-    private JButton close;
+//    private JButton close;
 
     public static Random rng = new Random();
 
@@ -89,7 +89,7 @@ public class GameEngine extends JFrame {
     private GameEngine() {
 
         setLayout(null);
-        close = new JButton("losers click here");
+ /*       close = new JButton("losers click here");
         getContentPane().add(close);
         Insets insets = getInsets();
         close.setBounds(insets.left + SCREEN_WIDTH - 200,
@@ -99,7 +99,7 @@ public class GameEngine extends JFrame {
                 System.exit(100);
             }
         });
-
+*/
         Level level = null;
         try {
             level = Level.getNextLevel();
@@ -155,17 +155,6 @@ public class GameEngine extends JFrame {
 		}
             }
         }
-/*
- *      ???
-        for (int i=0; i<objects.size(); i++) {
-            if(objects.get(i).getName().equals("Coin")) {
-            	break;
-            }
-            else {
-            	win = true;
-            }
-        }
-*/
     }
 
 
@@ -176,7 +165,7 @@ public class GameEngine extends JFrame {
 
     public void paint(Graphics g) {
 
-        close.repaint();
+//        close.repaint();
 
     	if(buffer == null) {
     		return;

@@ -64,7 +64,7 @@ public class Warrior extends GameObject implements KeyListener {
     }
 
     public void move() {
-
+        
         if (currentDirection.equals("Right")) {
             dx = 5;
             dy = 0;

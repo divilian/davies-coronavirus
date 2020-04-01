@@ -1,12 +1,10 @@
 Higher priority:
 ----------------
-SD - Create Corona class and have it infect people
-SD - Have infected people infect other people
 TJ - Make game end when warrior becomes infected
 TJ - Detect end of level
 TJ - Make NPCs speed up every time a coin is captured
 TJ - Skin "coins" as various groceries instead, for game theme
+Dad - Remake the button so it doesn't flicker or prevent other objects from hearing the keyboard
 
 Lower priority:
 ---------------
-TJ - Do the close button better
