@@ -49,11 +49,6 @@ public class TJ extends BouncingGameObject {
     	}
     }
     
-    public static void speedUp()
-    {
-    	speedMultiplier+=0.5;
-    }
-    
     public void kill()
     {
     	super.kill();

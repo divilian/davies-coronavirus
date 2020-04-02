@@ -65,6 +65,10 @@ public class GameEngine extends JFrame {
     public static void main(String args[]) {
         GameEngine.instance();
     }
+    
+    public static List<GameObject> getObjects(){
+        return objects;
+    }
 
     public void addObject(GameObject x)
     {

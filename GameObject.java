@@ -22,6 +22,7 @@ abstract public class GameObject implements ImageObserver,
     protected int top, bottom, left, right;
     protected boolean infected;
     protected Image image;
+    protected boolean npc;
     
     public GameObject(int startX, int startY, int w, int h, String imageName) {
 
@@ -33,6 +34,7 @@ abstract public class GameObject implements ImageObserver,
         dx = 0;
         dy = 0;
         infected = false;
+        npc = true;
         updateHitbox();
         try {
             image = ImageIO.read(new File(imageName));
@@ -43,7 +45,13 @@ abstract public class GameObject implements ImageObserver,
     public boolean getInfected(){
         return infected;
     }
-
+    public boolean getNpc(){
+        return npc;
+    }
+    public void speedUp(int x){
+        dx*=x;
+        dy*=x;
+    }
     public int compareTo(GameObject o) {
         return z - o.z;
     }

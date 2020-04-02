@@ -35,7 +35,9 @@ public class Warrior extends GameObject implements KeyListener {
     	{
     		GameEngine.instance().addToScore(100);
     		o.kill();
-    		TJ.speedUp();
+            for(GameObject x: GameEngine.getObjects())
+                if(x.getNpc())
+                    x.speedUp(2);
     	}
     }
     
@@ -51,6 +53,7 @@ public class Warrior extends GameObject implements KeyListener {
         super(x, y, 80, 80, "warrior.png");
         z = 20;   // This is the top-most object.
         currentDirection = "stopped";
+        npc = false;
     }
 
     public int getX() { return x; }

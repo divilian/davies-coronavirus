@@ -23,7 +23,7 @@ public class Coin extends GameObject {
             image = ImageIO.read(new File(picName));
         }
         catch(Exception e) {e.printStackTrace(); System.exit(1);}
-        
+        npc = false;        
 }	
     /**
      * Returns the age of this Coin.
