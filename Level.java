@@ -108,7 +108,6 @@ public class Level {
             for (int i=0; i<quantity; i++) {
                 double x = getCoord(parts[2]);
                 double y = getCoord(parts[3]);
-                System.out.println("Adding " + objName);
                 objectSpecs.add(new ObjectSpec(objName, x, y));
             }
         }
