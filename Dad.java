@@ -2,6 +2,9 @@
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 import java.awt.Graphics;
+import java.io.File;
+
+import javax.imageio.ImageIO;
 
 public class Dad extends BouncingGameObject {
 	
@@ -22,6 +25,20 @@ public class Dad extends BouncingGameObject {
     public String getName()
     {
     	return "Dad";
+    }
+
+    public void infect()
+    {
+    	if(!infected)
+    	{
+    		infected = true;
+    		dx*=0.5;
+    		dy*=0.5;
+    		try {
+    			image = ImageIO.read(new File("dad_infected.png"));
+    		}
+        	catch (Exception e) { e.printStackTrace(); System.exit(1); }
+    	}
     }
 
     public void draw(Graphics g) {
