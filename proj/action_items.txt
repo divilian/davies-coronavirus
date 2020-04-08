@@ -1,6 +1,5 @@
 Higher priority:
 ----------------
-Dad - Remake the button so it doesn't flicker or prevent other objects from hearing the keyboard
 
 Lower priority:
 ---------------
