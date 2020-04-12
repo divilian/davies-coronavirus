@@ -8,7 +8,7 @@ import javax.imageio.ImageIO;
 import java.awt.event.KeyEvent;
 import java.awt.Graphics;
 
-public class TJ extends BouncingGameObject {
+public class TJ extends GameObject {
 	
     private static int numTJs = 0;
     private static final int MAX_TJS = 25;

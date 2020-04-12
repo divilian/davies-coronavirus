@@ -6,7 +6,7 @@ import java.io.File;
 
 import javax.imageio.ImageIO;
 
-public class Dad extends BouncingGameObject {
+public class Dad extends GameObject {
 	
 	public Dad(int x, int y) {
 		super(x, y, 75, 90, "dad.png");

@@ -24,13 +24,15 @@ public class Level {
     static class ObjectSpec {
         String name;
         int x, y;
+        String[] extraAttributes;
 
-        ObjectSpec(String n, double x, double y) {
+        ObjectSpec(String n, double x, double y, String[] e) {
             name = n;
             double gameHeight = GameEngine.BOTTOM_SIDE - GameEngine.TOP_SIDE;
             double gameWidth = GameEngine.RIGHT_SIDE - GameEngine.LEFT_SIDE;
             this.x = (int) Math.round(gameWidth * x);
             this.y = (int) Math.round(gameHeight * y);
+            extraAttributes = e;
         }
     }
 
@@ -108,7 +110,11 @@ public class Level {
             for (int i=0; i<quantity; i++) {
                 double x = getCoord(parts[2]);
                 double y = getCoord(parts[3]);
-                objectSpecs.add(new ObjectSpec(objName, x, y));
+                String[] extras = new String[parts.length-4];
+                for (int j=0; j<parts.length-4; j++) {
+                    extras[j] = parts[4+j];
+                }
+                objectSpecs.add(new ObjectSpec(objName, x, y, extras));
             }
         }
     }
@@ -125,7 +131,13 @@ public class Level {
                 args[1] = Integer.TYPE;
                 Constructor c = Class.forName(o.name).getConstructor(args);
                 GameObject obj = (GameObject) c.newInstance(o.x, o.y);
-                ge.addObject(obj);
+                GameObject wrapped = obj;
+                for (String extra: o.extraAttributes) {
+                    Constructor wc = Class.forName(extra+"GameObject").
+                        getConstructor(new Class[]{ GameObject.class });
+                    wrapped = (GameObject) wc.newInstance(wrapped);
+                }
+                ge.addObject(wrapped);
             }
         } catch (Exception e) {
             System.err.println(e);

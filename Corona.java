@@ -3,7 +3,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 import java.awt.Graphics;
 
-public class Corona extends BouncingGameObject {
+public class Corona extends GameObject {
 	
 	public Corona(int x, int y) {
 	    super(x, y, 75, 75, "corona.png");

@@ -36,10 +36,12 @@ abstract public class GameObject implements ImageObserver,
         infected = false;
         npc = true;
         updateHitbox();
-        try {
-            image = ImageIO.read(new File(imageName));
+        if (!imageName.equals("none")) {
+            try {
+                image = ImageIO.read(new File(imageName));
+            }
+            catch (Exception e) { e.printStackTrace(); System.exit(1); }
         }
-        catch (Exception e) { e.printStackTrace(); System.exit(1); }
     }
     
     public boolean getInfected(){
@@ -85,23 +87,19 @@ abstract public class GameObject implements ImageObserver,
     }
     
     public abstract String getName();
+
     /**
-     * Move this object one clock tick's worth of movement. Subclasses can
+     * Move this object one clock tick's worth of movement. The default
+     * behavior is to "stick" to the sides of the screen. Subclasses can
      * override this method to implement creature-type-specific move
      * algorithms.
      */
     public void move() {
         x += dx;
-        if (x < GameEngine.LEFT_SIDE) {
-            x = GameEngine.LEFT_SIDE;
-        } else if(x > GameEngine.RIGHT_SIDE - 80) {
-            x = GameEngine.RIGHT_SIDE - 80;
-        }
         y += dy;
-        if (y < GameEngine.TOP_SIDE) {
-            y = GameEngine.TOP_SIDE;
-        } else if (y > GameEngine.BOTTOM_SIDE - 80) {
-            y = GameEngine.BOTTOM_SIDE - 80;
+        if (x < GameEngine.LEFT_SIDE || x > GameEngine.RIGHT_SIDE - 80 ||
+            y < GameEngine.TOP_SIDE || y > GameEngine.BOTTOM_SIDE - 80) {
+            dx = dy = 0;
         }
         updateHitbox();
     }
