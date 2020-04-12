@@ -73,4 +73,20 @@ class BouncingGameObject extends GameObject {
         underlyingGameObject.draw(g);
     }
 
+    public boolean collidingWith(GameObject o) {
+        return underlyingGameObject.collidingWith(o);
+    }
+
+    public void touch(GameObject o){
+        underlyingGameObject.touch(o);
+    }
+
+    public boolean getInfected(){
+        return underlyingGameObject.getInfected();
+    }
+    public int getTop() { return underlyingGameObject.getTop(); }
+    public int getBottom() { return underlyingGameObject.getBottom(); }
+    public int getLeft() { return underlyingGameObject.getLeft(); }
+    public int getRight() { return underlyingGameObject.getRight(); }
+
 }

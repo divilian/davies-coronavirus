@@ -44,6 +44,11 @@ abstract public class GameObject implements ImageObserver,
         }
     }
     
+    public int getTop() { return top; }
+    public int getBottom() { return bottom; }
+    public int getLeft() { return left; }
+    public int getRight() { return right; }
+
     public boolean getInfected(){
         return infected;
     }
@@ -78,7 +83,10 @@ abstract public class GameObject implements ImageObserver,
     }
     
     public boolean collidingWith(GameObject o) {
-    	return (left<=o.right)&&(o.left<right)&&(top<o.bottom)&&(bottom>o.top);
+    	return left < o.getRight() &&
+            right > o.getLeft() &&
+            top < o.getBottom() &&
+            bottom > o.getTop();
     }
 
     public void touch(GameObject o){
@@ -111,7 +119,6 @@ abstract public class GameObject implements ImageObserver,
      * painting.
      */
     public void draw(Graphics g) {
-    	
         g.drawImage(image, x, y, (ImageObserver)this);
     }
 
