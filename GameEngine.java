@@ -187,14 +187,16 @@ public class GameEngine extends JFrame {
         int size = objects.size();
         for (int i=0; i<size; i++) {
 	        for(int x=0;x<size; x++){
-            	if(objects.get(i).collidingWith(objects.get(x))) {
-                 	objects.get(i).touch(objects.get(x));
-                    if(objects.size()<size){
-                       size--;
-                       i--; 
-                       x--;
+                if (i != x) {
+                    if(objects.get(i).collidingWith(objects.get(x))) {
+                        objects.get(i).touch(objects.get(x));
+                        if(objects.size()<size){
+                           size--;
+                           i--;
+                           x--;
+                        }
                     }
-		        }
+                }
             }
         }
     }
