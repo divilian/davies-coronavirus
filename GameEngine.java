@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import java.awt.image.ImageObserver;
 
 
 /**
@@ -27,7 +28,7 @@ import java.util.Random;
  * engine maintains a collection of {@link GameObject}s that it uses to
  * represent individual creatures in the game.
  */
-public class GameEngine extends JFrame {
+public class GameEngine extends JFrame implements ImageObserver {
 
     // These dimension-related variables are set in the static initializer.
     public static int SCREEN_WIDTH;
@@ -47,6 +48,9 @@ public class GameEngine extends JFrame {
 
     private Image buffer = null;
     private Timer timer = null;
+
+    private Level currentLevel;
+
 //    private JButton close;
 
     public static Random rng = new Random();
@@ -105,15 +109,14 @@ public class GameEngine extends JFrame {
             }
         });
 */
-        Level level = null;
         try {
-            level = Level.getNextLevel();
+            currentLevel = Level.getNextLevel();
         } catch (Level.MaxLevelException e) {
             System.err.println("No levels!");
             System.exit(99);
         }
 
-        System.out.println("Playing " + level);
+        System.out.println("Playing " + currentLevel);
 
         setUndecorated(true);
         setVisible(true);
@@ -165,7 +168,7 @@ public class GameEngine extends JFrame {
         }
         timer.scheduleAtFixedRate(new ClockTickTask(), 50, 50);
 
-        level.populate(this);
+        currentLevel.populate(this);
 
         Warrior w = Warrior.instance();
         addObject(w);
@@ -216,8 +219,11 @@ public class GameEngine extends JFrame {
     	}
 
    		Graphics bufferGraphics = buffer.getGraphics();
-       	bufferGraphics.setColor(Color.BLACK);
-       	bufferGraphics.fillRect(0, 0, getWidth(), getHeight());
+      	bufferGraphics.setColor(Color.BLACK);
+      	bufferGraphics.fillRect(0, 0, getWidth(), getHeight());
+        if (currentLevel != null) {
+            fillBackground(bufferGraphics);
+        }
 
         // Sort objects by z-order (they know how to do this) so that things
         // are drawn in the right sequence bottom-to-top.
@@ -236,6 +242,18 @@ public class GameEngine extends JFrame {
        	bufferGraphics.drawString("Score: " + score,50,70);
 
        	g.drawImage(buffer, 0, 0, this);
+    }
+
+    private void fillBackground(Graphics g) {
+        Image bgImage = currentLevel.getBgImage();
+        int imageW = bgImage.getWidth(this);
+        int imageH = bgImage.getHeight(this);
+        int screenH = bgImage.getHeight(this);
+        for (int x=LEFT_SIDE; x<RIGHT_SIDE; x+=imageW) {
+            for (int y=TOP_SIDE; y<BOTTOM_SIDE; y+=imageH) {
+                g.drawImage(bgImage, x, y, this);
+            }
+        }
     }
 
 }

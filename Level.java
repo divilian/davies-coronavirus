@@ -8,6 +8,9 @@ import java.util.Collections;
 import java.util.Scanner;
 import java.lang.Math;
 import java.lang.reflect.Constructor;
+import java.awt.Image;
+import javax.imageio.ImageIO;
+import java.awt.image.ImageObserver;
 
 /**
  * A level object represents a single level of the game: its initial screen
@@ -42,6 +45,8 @@ public class Level {
     private static int maxLevelNum;
 
     private int levelNum;
+    private Image bgImage;
+    private String bgImageFilename;
     private String name;
     private ArrayList<ObjectSpec> objectSpecs = new ArrayList<ObjectSpec>();
 
@@ -82,6 +87,14 @@ public class Level {
     private Level(int num) {
         levelNum = num;
         hydrate(LEVEL_DIR + File.separator + "level" + num + ".lvl");
+        try {
+            bgImage = ImageIO.read(new File(bgImageFilename));
+        }
+        catch (Exception e) { e.printStackTrace(); System.exit(1); }
+    }
+
+    public Image getBgImage() {
+        return bgImage;
     }
 
     private double getCoord(String s) {
@@ -101,6 +114,7 @@ public class Level {
             System.exit(3);
         }
         name = s.nextLine();
+        bgImageFilename = s.nextLine();
     
         while (s.hasNextLine()) {
             String objLine = s.nextLine();
