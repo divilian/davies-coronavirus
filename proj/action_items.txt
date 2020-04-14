@@ -1,5 +1,10 @@
 Higher priority:
 ----------------
+TJ - When you complete a level, it should go to the next level, drr.
+SD - Add inanimate objects that can be bounced into.
+TJ - Design a few different levels, with different themed backgrounds, objects,
+    and difficulty, and try to roughly balance them game-play-wise.
 
 Lower priority:
 ---------------
+TJ - Add sound effects.
