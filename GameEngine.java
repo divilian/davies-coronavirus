@@ -175,9 +175,7 @@ public class GameEngine extends JFrame implements ImageObserver {
 
         currentLevel.populate(this);
 
-        Warrior w = Warrior.instance();
-        addObject(w);
-        addKeyListener(w);
+        addKeyListener(Warrior.instance());
 
         score = 0;
     }

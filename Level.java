@@ -137,6 +137,8 @@ public class Level {
      * Populate the {@link GameEngine} passed with items from this Level.
      */
     public void populate(GameEngine ge) {
+        ge.getObjects().clear();
+        ge.addObject(Warrior.instance());
 
         try {
             for (ObjectSpec o : objectSpecs) {
