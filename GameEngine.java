@@ -146,11 +146,16 @@ public class GameEngine extends JFrame implements ImageObserver {
                     else{
                         if(win){
                             System.out.println("You Win!!");
-                            System.exit(100);
+                            try{
+                                currentLevel = Level.getNextLevel();
+                                currentLevel.populate(theInstance); 
+                                System.out.println("Playing " + currentLevel);
+                                win=false;
+                            }catch(Level.MaxLevelException e){System.out.println("You beat the game! Thanks for playing!!"); System.exit(100);}
                         }
                         else
                             if(lose){
-                                System.out.println("You Lose!!!");                
+                                System.out.println("You Lose!!!"); 
                                 System.exit(100);
                             }
                     }
